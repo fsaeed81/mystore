@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyStore.com</title>
+	<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+</head>
+<body>
+	<div class="ui fixed primary menu">
+		<div class="ui container">
+  <a class="item" href="/">
+    Home
+  </a>
+  <% if(currentUser){ %>
+  <a class="item" href="/items/new">
+    New Item
+  </a>
+  <% } %>
+  <a class="item">
+    Friends
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
+    <% if(!currentUser){ %>
+    <a class="ui item" href="/register">
+      Register
+    </a>
+    <a class="ui item" href="/login">
+      Login
+    </a>
+    <% } %>
+    <% if(currentUser){ %>
+    <a class="ui item" href="/profile">Welcome <%=currentUser.fName%></a>
+    <a class="ui item" href="/logout">
+      Logout
+    </a>
+    <% } %>
+  </div>
+  </div>
+</div>
+<div class="pusher">
+	<div class="full height">
+		<div class="ui masthead vertical segment">

@@ -1,0 +1,59 @@
+<% include ../partials/header %>
+<div class="spaced ui link cards centered container">
+	<div class="card item-card">
+		
+		<div class="content">
+		<h1>Edit <%=item.name%></h1>
+		<form action="/items/<%=item._id%>/edit" method="POST">
+			<div class="form-group">
+				<div class="ui input labeled green">
+					<label class="ui label" for="name">Name</label>
+					<input type="text" name="name" id="name" value="<%=item.name%>"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group ui form">
+				<div class="ui input labeled field">
+					<label class="ui label" for="description">Description</label>
+					<textarea type="text" name="description" id="description" cols="50" rows="10"><%=item.description%></textarea>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled green">
+					<label class="ui label" for="image">Image</label>
+					<input type="text" name="image" id="image" value="<%=item.image%>"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled green">
+					<label class="ui label" for="price">Price</label>
+					<input type="text" name="price" id="price" value="<%=item.price%>"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="quantity">Quantity</label>
+					<input type="text" name="quatity" id="quantity" value="<%=item.quatity%>"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="manufacturer">Manufacturer</label>
+					<input type="text" name="manufacture" id="manufacturer" value="<%=item.manufacture%>"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group buttons">
+				<button class="ui primary button">Update</button>
+				<a class="ui button right" href="/items/<%=item._id%>">Cancel</a>
+			</div>
+			
+		</form>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer %>

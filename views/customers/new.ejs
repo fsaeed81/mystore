@@ -1,0 +1,80 @@
+<% include ../partials/header %>
+<div class="spaced ui link cards centered container">
+	<div class="card item-card">
+		
+		<div class="content">
+		<h1>New User</h1>
+		<form action="/register" method="POST">
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="username">Username</label>
+					<input type="text" name="username" id="username" placeholder="usrName"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="password">Password</label>
+					<input type="password" name="password" id="password" placeholder="*****"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="fname">First Name</label>
+					<input type="text" name="fname" id="fname" placeholder="John"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="lname">Last Name</label>
+					<input type="text" name="lname" id="lname" placeholder="Doe"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="street">Street</label>
+					<input type="text" name="street" id="street" placeholder="10 Shoreline Drive"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="city">City</label>
+					<input type="text" name="city" id="city" placeholder="San Francisco"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="state">State</label>
+					<input type="text" name="state" id="state" placeholder="CA"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="zip">Zip Code</label>
+					<input type="text" name="zip" id="zip" placeholder="94555"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="phone">Phone</label>
+					<input type="text" name="phone" id="phone" placeholder="555-555-5555"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<button class="ui primary button">Submit</button>
+			</div>
+			
+		</form>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

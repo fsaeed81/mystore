@@ -1,0 +1,31 @@
+<% include ../partials/header %>
+<div class="spaced ui link cards centered container">
+	<div class="card item-card">
+		<div class="content">
+			<h1>User Login</h1>
+			<form action="/login" method="POST">
+				<div class="form-group">
+					<div class="ui input labeled green">
+						<label class="ui label" for="username">Username</label>
+						<input type="text" name="username" id="username" placeholder="usrName"/>
+					</div>
+				</div>
+				<br />
+				<div class="form-group">
+					<div class="ui input labeled green">
+						<label class="ui label" for="password">Password</label>
+						<input type="password" name="password" id="password" placeholder="*****"/>
+					</div>
+				</div>
+				<br />
+				<div class="form-group">
+					<button class="ui primary button">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<% include ../partials/footer %>

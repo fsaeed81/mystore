@@ -1,0 +1,59 @@
+.masthead.segment {
+	padding: 4em 0em 0em;
+	min-height: 450px;
+}
+
+.masthead h1.ui.header {
+    margin-top: 2em;
+    margin-bottom: 0em;
+    font-size: 4em;
+    font-weight: normal;
+}
+
+.spaced.ui.cards {
+	margin-top:2em;
+}
+
+@media only screen and (max-width: 700px)
+.masthead.segment {
+    min-height: 350px;
+}
+
+.ui.link.cards .card:hover {
+	cursor: default;
+}
+
+.ui.cards>.item-card {
+	margin-top: 20px;
+	width: 100%;
+}
+
+/* show image */
+.show-item img {
+	max-width: 60%;
+}
+
+/* price */
+.price-right {
+	margin-right: -16px;
+}
+.price-display{
+	width:100px;
+}
+
+.ui.buttons.admin-right {
+	margin-right:15%;
+}
+
+/* input width */
+.input.labeled, .form-group.buttons {
+	width: 60%;
+}
+
+.inline {
+	display: inline-block;
+}
+
+.right {
+	float: right;
+}

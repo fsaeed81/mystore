@@ -1,0 +1,102 @@
+<% include ../partials/header %>
+
+<div class="pusher">
+	<div class="ui inverted green vertical masthead center aligned segment">
+	<h1 class="ui inverted header"><%=item.name%></h1>
+		<div class="image show-item"> <img src="<%=item.image%>"></div>
+	</div>
+</div>
+
+<div class="ui cards centered container">
+	<div class="card item-card">
+		
+		<div class="content">
+			<div class="description"><%=item.description%></div>
+		</div>
+		<div class="extra content">
+			<div class="ui right action input price-right">
+			  <a href="items/<%=item._id%>" class="ui green labeled icon button">
+			    <i class="cart icon"></i>
+			    Add to Cart
+			  </a>
+			  <input class="price-display" type="text" value="$<%=item.price%>" disabled>
+			</div>
+			<div class="ui buttons right admin-right">
+			  <a class="ui button orange" href="/items/<%=item._id%>/edit">Edit</a>
+			  <div class="or"></div>
+			  <form action="/items/<%=item._id%>/delete" method="POST">
+			  	<button class="ui red button">Delete</button>
+			  </form>
+			</div>
+		<span class="inline left">Quantity: <strong><%=item.quatity%></strong></span>
+		<br />
+		<%=item.date.toDateString()%>
+      	</div>
+	</div>
+</div>
+<br />
+
+
+<!-- comments code	-->
+<div class="ui cards centered container">
+<h2> Comments by Customers</h2>
+
+	<% item.comments.forEach(function(comment){ %>
+	<div class="card item-card">		
+		<div class="content">
+			<div class="right floated meta">10 days ago</div>
+			<i class="comment icon"></i><%= comment.customer[0].username%>
+			<br />
+			<strong><%= comment.title %></strong>
+			<p><%= comment.description %></p>
+			<form action="/items/<%=item._id%>/comment/<%=comment._id%>/delete" method="POST">
+				<button class="ui red button right mini">Delete</button>
+			</form>
+		</div>
+	</div>
+	<% }); %>
+		
+	<% if(currentUser) { %>
+
+	<!-- add comment code	-->
+	<div class="card item-card">
+		<div class="content comment-add" style="display:none;">
+			<form action="/items/<%=item._id%>/comment/add" method="POST">
+			<div class="header">
+				<h3>Add New Comment</h3>
+			</div>
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="customer">Username</label>
+					<span><%=currentUser.username%></span>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="title">Title</label>
+					<input type="text" name="title" id="title" placeholder="This is the title" required/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group ui form">
+				<div class="ui input labeled field">
+					<label class="ui label" for="description">Description</label>
+					<textarea type="text" name="description" id="description" cols="50" rows="10" placeholder="This is description of comment"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<button class="ui primary button">Submit</button>
+				<a class="ui grey mini button" onClick="document.getElementsByClassName('comment-add')[0].style.display='none';">Cancel</a>
+			</div>
+			</form>
+		</div>
+	</div>
+	
+
+	<div class="text-right">
+		<button class="ui primary button comment-add-button" onClick="document.getElementsByClassName('comment-add')[0].style.display='block'">Add New Comment</button>
+	</div>
+	<%}%>
+</div>
+<% include ../partials/footer %>

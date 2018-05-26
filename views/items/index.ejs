@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+<div class="pusher">
+	<div class="ui inverted vertical masthead center aligned segment">
+		<div class="ui text container">
+			<h1 class="ui inverted header">Store.com</h1>
+			<h2>Find all your computer needs</h2>
+		</div>
+	</div>
+	<div class="ui vertical stripe segment container">
+		<div class="ui cards">
+		<% items.forEach(function(item){ %>
+			<div class="card">
+				<div class="image"> <img src="<%=item.image%>"></div>
+				<div class="content">
+					<div class="header"><%=item.name%></div>
+					<div class="description"><%=item.description.substring(0, 100)%>...</div>
+				</div>
+				<div class="extra content">
+		      		<span class="right floated">$<%=item.price%></span>
+		      		<span>
+		      			<a href="items/<%=item._id%>" class="ui primary button">More Info</a>
+		      		</span>
+		      	</div>
+			</div>
+		<%});%>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer %>

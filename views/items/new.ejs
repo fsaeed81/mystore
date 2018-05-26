@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+<div class="spaced ui link cards centered container">
+	<div class="card item-card">
+		
+		<div class="content">
+		<h1>New Item</h1>
+		<form action="/items" method="POST">
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="name">Name</label>
+					<input type="text" name="name" id="name" placeholder="Apple MacBook Pro..."/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group ui form">
+				<div class="ui input labeled field">
+					<label class="ui label" for="description">Description</label>
+					<textarea type="text" name="description" id="description" cols="50" rows="10" placeholder="This is description of the product"></textarea>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="image">Image</label>
+					<input type="text" name="image" id="image" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="price">Price</label>
+					<input type="text" name="price" id="price" placeholder="100.00"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="quantity">Quantity</label>
+					<input type="text" name="quatity" id="quantity" placeholder="10"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<div class="ui input labeled">
+					<label class="ui label" for="manufacturer">Manufacturer</label>
+					<input type="text" name="manufacture" id="manufacturer" placeholder="Apple"/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<button class="ui primary button">Submit</button>
+			</div>
+			
+		</form>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer %>
