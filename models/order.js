@@ -10,11 +10,13 @@ var orderSchema = new mongoose.Schema({
 		type: 	mongoose.Schema.Types.ObjectId,
 		ref : 	"Item"
 	}],
-	customers: 	[
-	{
-		type: 	mongoose.Schema.Types.ObjectId,
-		ref	: 	"Customer"
-	}]
+	customer: 	{
+		id:		{
+			type: 	mongoose.Schema.Types.ObjectId,
+			ref	: 	"Customer"
+				},
+		username: String
+	}
 });
 
 

@@ -21,6 +21,7 @@
 			  </a>
 			  <input class="price-display" type="text" value="$<%=item.price%>" disabled>
 			</div>
+		 <% if(currentUser && item.customer.id && item.customer.id.equals(currentUser._id)){ %>
 			<div class="ui buttons right admin-right">
 			  <a class="ui button orange" href="/items/<%=item._id%>/edit">Edit</a>
 			  <div class="or"></div>
@@ -28,9 +29,13 @@
 			  	<button class="ui red button">Delete</button>
 			  </form>
 			</div>
+		<%}%>
 		<span class="inline left">Quantity: <strong><%=item.quatity%></strong></span>
 		<br />
-		<%=item.date.toDateString()%>
+		Posted By: <strong><%=item.customer.username%></strong>
+		 <br />
+		<%=item.date.toDateString()%> 
+		
       	</div>
 	</div>
 </div>
@@ -45,14 +50,16 @@
 	<div class="card item-card">		
 		<div class="content">
 			<div class="right floated meta">10 days ago</div>
-			<i class="comment icon"></i><%= comment.customer[0].username%>
+			<i class="comment icon"></i><%= comment.customer.username%>
 			<br />
 			<strong><%= comment.title %></strong>
 			<p><%= comment.description %></p>
+			<% if(currentUser && comment.customer.id && comment.customer.id.equals(currentUser._id)){ %>
 			<form action="/items/<%=item._id%>/comment/<%=comment._id%>/delete" method="POST">
 				<button class="ui red button right mini">Delete</button>
 			</form>
-		</div>
+			<%}%>
+		</div> 
 	</div>
 	<% }); %>
 		
@@ -75,14 +82,14 @@
 			<div class="form-group">
 				<div class="ui input labeled">
 					<label class="ui label" for="title">Title</label>
-					<input type="text" name="title" id="title" placeholder="This is the title" required/>
+					<input type="text" name="comment[title]" id="title" placeholder="This is the title" required/>
 				</div>
 			</div>
 			<br />
 			<div class="form-group ui form">
 				<div class="ui input labeled field">
 					<label class="ui label" for="description">Description</label>
-					<textarea type="text" name="description" id="description" cols="50" rows="10" placeholder="This is description of comment"></textarea>
+					<textarea type="text" name="comment[description]" id="description" cols="50" rows="10" placeholder="This is description of comment"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
