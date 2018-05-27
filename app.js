@@ -35,7 +35,8 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
 //connect to mongoose
-mongoose.connect("mongodb://localhost/mystore2");
+//mongoose.connect("mongodb://localhost/mystore2");
+mongoose.connect("mongodb://fsaeed81:sanjose@ds237610.mlab.com:37610/fsaeed81-mystore");
 
 //create a single item
 // Item.create({
@@ -85,6 +86,12 @@ app.use('/items', itemRoutes);
 app.use('/items/:id/comment', commentRoutes);
 
 
-app.listen(3000, function(){
-	console.log("server started");
-});
+if(process.env.ENVURL){
+	app.listen(3000,function(){
+		console.log("myStore Has Started!");
+	});
+} else {
+	app.listen(process.env.PORT, process.env.IP, function(){
+		console.log("started... ");
+	});
+}
