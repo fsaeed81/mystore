@@ -41,8 +41,9 @@ router.post("/", Middleware.isLoggedIn, function(req, res){
 	//Create the new Item
 	Item.create(newItem, function(err, item){
 		if(err){
-			console.log(err);
+			req.flash("error", err.message);
 		} else {
+			req.flash("success", "New item created.");
 			res.redirect("items/"+item._id);
 		}
 	});
@@ -60,7 +61,7 @@ router.get("/:id", function(req, res){
 		}).exec(function(err, item){
 		*/
 		if(err){
-			console.log(err);
+			req.flash("error", err.message);
 		} else {
 			res.render("items/show", {item: item});
 		}
@@ -68,10 +69,10 @@ router.get("/:id", function(req, res){
 });
 
 // route: EDIT - update item to db
-router.get("/:id/edit", Middleware.isLoggedIn, function(req, res){
+router.get("/:id/edit", Middleware.checkItemOwnership, function(req, res){
 	Item.findById(req.params.id, function(err, item){
 		if(err){
-			console.log(err);
+			req.flash("error", err.message);
 		} else {
 			res.render("items/edit", {item: item});
 		}		
@@ -80,7 +81,7 @@ router.get("/:id/edit", Middleware.isLoggedIn, function(req, res){
 });
 
 // route: UPDATE - add new item to db
-router.post("/:id/edit", Middleware.isLoggedIn, function(req, res){
+router.put("/:id/edit", Middleware.checkItemOwnership, function(req, res){
 	var updateItem = {
 		name: req.body.name,
 		description: req.body.description,
@@ -96,8 +97,9 @@ router.post("/:id/edit", Middleware.isLoggedIn, function(req, res){
 
 	Item.findByIdAndUpdate(req.params.id, { $set: updateItem }, { new: true }, function(err, item){
 		if(err){
-			console.log(err);	
+			req.flash("error", err.message);	
 		} else {
+			req.flash("success", "Item has been updated")
 			res.redirect("/items/" + req.params.id);
 		}
 	});
@@ -105,12 +107,13 @@ router.post("/:id/edit", Middleware.isLoggedIn, function(req, res){
 
 
 // route: DELETE - delete item to db
-router.post("/:id/delete", Middleware.isLoggedIn, function(req, res){
+router.delete("/:id/delete", Middleware.checkItemOwnership, function(req, res){
 	Item.deleteOne({_id: req.params.id}, function(err){
 		if(err){
-			console.log(err);
+			req.flash("error", err.message);
 		}
 		else {
+			req.flash("success", "Item has been removed.");
 			res.redirect("/")
 		}
 	});

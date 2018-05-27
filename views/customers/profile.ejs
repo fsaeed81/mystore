@@ -3,8 +3,12 @@
 	<div class="card item-card">
 		
 		<div class="content">
+		
+		<form action="/delete?_method=DELETE" method="POST" style="position:relative">
+			<button class="ui red button right">Delete</button>
+		</form>
 		<h1>New User</h1>
-		<form action="/profile" method="POST">
+		<form action="/profile?_method=PUT" method="POST">
 			<div class="form-group">
 				<div class="ui input labeled">
 					<label class="ui label" for="username">Username</label>
@@ -73,6 +77,7 @@
 			</div>
 			
 		</form>
+
 		</div>
 	</div>
 </div>

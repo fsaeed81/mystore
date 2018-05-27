@@ -51,3 +51,9 @@
 <div class="pusher">
 	<div class="full height">
 		<div class="ui masthead vertical segment">
+    <% if(success && success.length > 0){ %>
+    <div class="ui green floating message"><strong><%=success%></strong></div>
+    <%}%>
+    <% if(error && error.length > 0){ %>
+    <div class="ui red floating message"><strong><%=success%></strong></div>
+    <%}%>

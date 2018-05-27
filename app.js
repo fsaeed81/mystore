@@ -1,13 +1,13 @@
 /// TODO : 
 //
-//	* Adding new item stores as owner and can only be edited or deleted by owner 	- DONE
-//  * Adding new comment can only be deleted by owner or items owner 				- DONE
-//  * Users can purchase an item, will add to their order and remove from quantity
-//	* Split up routes																- 
-//	* Fix storing Remote keys, especially for comments, save id and username
-//	* Make the application CRUD compliant
-// 	* Middleware
-//  * Add flash messages (connect-flash)
+//	* Adding new item stores as owner and can only be edited or deleted by owner 		- DONE
+//  * Adding new comment can only be deleted by owner or items owner 					- DONE
+//  * Users can purchase an item, will add to their order and remove from quantity		- 
+//	* Split up routes																	- DONE
+//	* Fix storing Remote keys, especially for comments, save id and username			- DONE
+//	* Make the application CRUD compliant												- DONE
+// 	* Middleware																		- DONE
+//  * Add flash messages (connect-flash)												- DONE
 //  * Publish to online
 //  * 
 /// TODO END
@@ -16,10 +16,12 @@
 var express 		= 	require("express"),
 	mongoose		= 	require("mongoose"),
 	bodyParser		= 	require("body-parser"),
+	flash 			=	require("connect-flash"),
 	Customer		=	require("./models/customer"),
 	Order			=	require("./models/order"),
 	Item  			= 	require("./models/item"),
 	Comment			=	require("./models/comment"),
+	methodOverride  = 	require("method-override"),
 	passport		=	require("passport"),
 	LocalStrategy	=	require("passport-local")
 	app 			= 	express();
@@ -49,6 +51,10 @@ mongoose.connect("mongodb://localhost/mystore2");
 // 	}
 // })
 
+
+app.use(methodOverride("_method"));
+
+
 /////////////////// PASSPORT CONFIGURATIONS ////////////////////////
 
 // Configure passport
@@ -60,6 +66,7 @@ app.use(require("express-session")({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 passport.use(new LocalStrategy(Customer.authenticate()));
 passport.serializeUser(Customer.serializeUser());
 passport.deserializeUser(Customer.deserializeUser());
@@ -67,6 +74,8 @@ passport.deserializeUser(Customer.deserializeUser());
 //Middleware
 app.use(function(req, res, next){
 	res.locals.currentUser= req.user;
+	res.locals.success = req.flash("success");
+	res.locals.error = req.flash("error");
 	next();
 });
 

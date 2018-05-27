@@ -27,11 +27,11 @@ router.post("/register", function(req, res){
 	};
 	Customer.register(newCustomer, req.body.password, function(err, customer){
 		if(err){
-			console.log(err);
 			res.render("customers/new");
 		} 
 		
 		passport.authenticate("local")(req, res, function(){
+			req.flash("success", "New user created, welcome " + customer.username);
 			res.redirect("/");
 		});
 	});
@@ -48,7 +48,7 @@ router.get("/profile", Middleware.isLoggedIn, function(req, res){
 	});
 });
 
-router.post("/profile", Middleware.isLoggedIn, function(req, res){
+router.put("/profile", Middleware.isLoggedIn, function(req, res){
 	var updateCustomer = {
 		username	: req.body.username,
 		fName		: req.body.fname,
@@ -64,10 +64,9 @@ router.post("/profile", Middleware.isLoggedIn, function(req, res){
 			console.log(err);
 			res.redirect("/profile");
 		} else {
+			req.flash("success", "User account updated.");
 			res.redirect("/");
-		}
-			
-
+		}		
 		
 		passport.authenticate("local")(req, res, function(){
 			res.redirect("/");
@@ -80,21 +79,15 @@ router.get("/login", function(req, res){
 	res.render("customers/login")
 });
 
-// app.post("/login", passport.authenticate("local",
-// 	{
-// 		successRedirect: "/",
-// 		failureRedirect: "/login"
-// 	}), function(req, res){
-// });
-
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.redirect('/login'); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      var redirectTo = req.session.redirectTo ? req.session.redirectTo : '/';
+      var redirectTo = req.session.redirectTo ? req.session.redirectTo : '/items';
       delete req.session.redirectTo;
+      req.flash("success", "Logged In, welcome " + user.username);
       res.redirect(redirectTo);
     });
   })(req, res, next);
@@ -104,7 +97,20 @@ router.post('/login', function(req, res, next) {
 //route: LOGOUT - log user out
 router.get("/logout", function(req, res){
 	req.logout();
-	res.redirect("/");
+	req.flash("success", "User logged out, goodbye");
+	res.redirect("/items");
+});
+
+
+router.delete("/delete", Middleware.isLoggedIn, function(req, res){
+	Customer.deleteOne({_id: req.user._id}, function(err){
+		if(err){
+			req.flash("error", err.message);
+			res.redirect("/profile");
+		}
+		req.flash("success", "User account deleted");
+		res.redirect("/");
+	});
 });
 
 
