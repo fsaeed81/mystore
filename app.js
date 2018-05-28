@@ -8,7 +8,7 @@
 //	* Make the application CRUD compliant												- DONE
 // 	* Middleware																		- DONE
 //  * Add flash messages (connect-flash)												- DONE
-//  * Publish to online
+//  * Publish to online																	- DONE
 //  * 
 /// TODO END
 
